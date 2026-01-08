@@ -1,7 +1,7 @@
 # Deep Learning Dynamics Experiment
 # Symbolic Regression for Catastrophic Forgetting Dynamics
 
-__version__ = "0.3.0"
+__version__ = "0.4.0"
 
 from .models import LinearTeacher, LinearStudent, TaskPair, create_task_pair
 from .nonlinear_models import (
@@ -11,4 +11,8 @@ from .nonlinear_models import (
 from .universal_subspace import (
     UniversalSubspace, SubspaceAnalysis,
     compute_transition_boundary, fit_transition_equation
+)
+from .gradient_interference import (
+    GradientMetrics, GradientInterferenceResult, Phase5Config,
+    compute_gradient_alignment, run_gradient_interference_experiment
 )

@@ -1,0 +1,62 @@
+{
+  "timestamp": "2026-01-08T21:36:19.655829",
+  "n_samples": 495,
+  "correlations": {
+    "similarity": {
+      "pearson_r": -0.38266455939046107,
+      "p_value": 1.041556677221099e-18,
+      "significant": true
+    },
+    "mean_gradient_angle": {
+      "pearson_r": -0.8688374627514973,
+      "p_value": 1.2547981223186806e-152,
+      "significant": true
+    },
+    "min_gradient_angle": {
+      "pearson_r": -0.8598009334931709,
+      "p_value": 5.208885866101532e-146,
+      "significant": true
+    },
+    "max_gradient_angle": {
+      "pearson_r": -0.8524131671706968,
+      "p_value": 6.193493218458191e-141,
+      "significant": true
+    },
+    "std_gradient_angle": {
+      "pearson_r": 0.19279093703129194,
+      "p_value": 1.5669001404806767e-05,
+      "significant": true
+    },
+    "mean_gradient_projection": {
+      "pearson_r": -0.28211456462185525,
+      "p_value": 1.6474537387416035e-10,
+      "significant": true
+    },
+    "cumulative_interference": {
+      "pearson_r": 0.5185091099259589,
+      "p_value": 2.0679291119881327e-35,
+      "significant": true
+    },
+    "early_gradient_angle": {
+      "pearson_r": -0.8263053416095716,
+      "p_value": 5.283877049489033e-125,
+      "significant": true
+    },
+    "late_gradient_angle": {
+      "pearson_r": -0.8375705239101767,
+      "p_value": 1.5737520762511414e-131,
+      "significant": true
+    }
+  },
+  "hypothesis_tests": {
+    "gradient_angle_hypothesis": "SUPPORTED"
+  },
+  "key_findings": [
+    "Gradient angle negatively correlates with forgetting (r=-0.869), supporting the hypothesis that destructive interference causes forgetting.",
+    "Gradient angle has partial correlation r=-0.848 with forgetting even after controlling for similarity, suggesting it captures additional mechanism."
+  ],
+  "partial_correlation": {
+    "gradient_angle_given_similarity": -0.8481730669848525,
+    "p_value": 3.81078372771533e-138
+  }
+}

@@ -1,0 +1,67 @@
+# Phase 1: Linear Network Baseline Configuration
+# Use this to customize experiment parameters
+
+experiment:
+  name: "phase1_linear_baseline"
+  description: "Symbolic regression for catastrophic forgetting in linear models"
+
+# Data generation settings
+data:
+  d_in: 100           # Input dimension
+  d_out: 10           # Output dimension
+
+  # Hyperparameter sweeps
+  widths: [50, 100, 200, 500, 1000]
+  similarities: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+  learning_rates: [0.001, 0.01, 0.1]
+  n_steps: [100, 500, 1000, 2000]
+
+  # Repetitions for statistical robustness
+  n_seeds: 5
+
+  # Training settings
+  batch_size: 64
+  noise_std: 0.0      # Label noise (0 = deterministic)
+  n_eval_samples: 1000
+
+  # Device
+  device: "cpu"       # or "cuda"
+
+# Symbolic regression settings
+symbolic_regression:
+  niterations: 100    # Number of SR iterations
+  maxsize: 30         # Maximum equation complexity
+  parsimony: 0.001    # Complexity penalty (higher = simpler)
+  procs: 4            # Parallel processes
+
+  # Operators
+  binary_operators: ["+", "-", "*", "/", "^"]
+  unary_operators: ["exp", "log", "sqrt", "abs"]
+
+  # Constraints
+  constraints:
+    "^": [-1, 1]      # Limit exponent range
+
+# Validation settings
+validation:
+  test_split: 0.2
+  r2_threshold: 0.8
+  complexity_threshold: 15
+
+# Output settings
+output:
+  dir: "results/phase1"
+  save_intermediate: true
+  generate_plots: true
+
+# Quick test mode (override above for fast iteration)
+quick_mode:
+  enabled: false
+  d_in: 50
+  d_out: 5
+  widths: [25, 50, 100]
+  similarities: [0.0, 0.5, 1.0]
+  learning_rates: [0.01]
+  n_steps: [100]
+  n_seeds: 2
+  sr_iterations: 20

@@ -1,0 +1,35 @@
+{
+  "d_in": 50,
+  "d_out": 5,
+  "hidden_widths": [
+    32,
+    64,
+    128,
+    256
+  ],
+  "activations": [
+    "relu",
+    "tanh",
+    "gelu"
+  ],
+  "similarities": [
+    0.0,
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "learning_rates": [
+    0.001,
+    0.01,
+    0.1
+  ],
+  "init_scales": [
+    0.5,
+    1.0,
+    2.0
+  ],
+  "n_steps": 300,
+  "n_seeds": 3,
+  "batch_size": 64
+}

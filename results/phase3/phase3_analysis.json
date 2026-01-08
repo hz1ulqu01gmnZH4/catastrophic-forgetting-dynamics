@@ -1,0 +1,19 @@
+{
+  "basic_stats": {
+    "n_samples": 845,
+    "mean_forgetting": 0.3486171703984046,
+    "std_forgetting": 0.24688904654620472,
+    "mean_deviation_t2": 0.2620953027822244,
+    "std_deviation_t2": 0.14136809004871553
+  },
+  "correlations_with_forgetting": {
+    "deviation_after_t2": -0.0004915114436909884,
+    "max_deviation_t2": 0.6796466498700973,
+    "deviation_increase": 0.21335419252095197,
+    "flr_after_t2": 0.0515074065770709,
+    "learning_rate": 0.15616371601485077,
+    "similarity": -0.9112142771628908,
+    "alignment_after_t2": 0.02263617324293776
+  },
+  "regime_stats": {
+    

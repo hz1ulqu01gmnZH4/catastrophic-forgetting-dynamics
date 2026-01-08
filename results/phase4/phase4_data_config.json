@@ -1,0 +1,34 @@
+{
+  "d_in": 50,
+  "d_out": 5,
+  "hidden_widths": [
+    32,
+    64,
+    128
+  ],
+  "activations": [
+    "gelu"
+  ],
+  "similarities": [
+    0.0,
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "learning_rates": [
+    0.05,
+    0.1,
+    0.15
+  ],
+  "init_scales": [
+    0.5,
+    1.0,
+    2.0
+  ],
+  "n_steps": 300,
+  "n_seeds": 5,
+  "batch_size": 64,
+  "track_every": 10,
+  "subspace_variance_target": 0.9
+}

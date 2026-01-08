@@ -1,0 +1,271 @@
+{
+  "basic_stats": {
+    "n_samples": 675,
+    "mean_forgetting": 0.33556555526760906,
+    "std_forgetting": 0.239129836976755
+  },
+  "correlations_with_forgetting": {
+    "loss_t1_after_t2": 0.9894570509588011,
+    "loss_t1_after_t1": -0.1429132108325797,
+    "t2_mean_deviation": 0.10057769260394588,
+    "t2_path_integral_deviation": 0.10033788588470352,
+    "t2_area_under_curve": 0.10033788588470349,
+    "t2_mean_velocity": 0.08329634978284495,
+    "t2_max_velocity": 0.08083631326050314,
+    "t2_max_deviation": 0.07998156857969546,
+    "t2_max_acceleration": 0.07969737122173585,
+    "t2_path_length": 0.07960825457026206,
+    "loss_t2_after_t2": 0.05910652127017996,
+    "t1_excursion_duration": 0.057395534917748854,
+    "t1_final_velocity": 0.04980761181649049,
+    "t2_final_deviation": 0.04766781431138924,
+    "t1_min_deviation": -0.040473293606625625,
+    "t1_initial_deviation": -0.03901308958961993,
+    "t1_return_to_baseline": 0.03269410405948947,
+    "t2_final_velocity": -0.02488363786475386,
+    "t2_min_deviation": 0.017714288109683608,
+    "t1_final_deviation": 0.017480457990347583,
+    "t2_initial_deviation": 0.017480457990347583,
+    "t1_trajectory_curvature": -0.0061132061491932545,
+    "t1_mean_momentum": 0.0033689445751350438,
+    "t1_max_momentum": 0.0025637695732497064,
+    "t1_mean_velocity": -0.0021990659643728394,
+    "t1_mean_deviation": -0.0016463537349563125,
+    "t1_path_integral_deviation": -0.0016427666358739105,
+    "t1_area_under_curve": -0.001642766635873908,
+    "t1_max_velocity": -0.0012319403675447051,
+    "t1_mean_acceleration": -0.0010063459097477583,
+    "t1_max_acceleration": -0.0010024608609763867,
+    "t1_max_curvature": -0.0009726550238882848,
+    "t1_deviation_std": -0.000792313193639707,
+    "t1_path_length": -0.0007659950956047652,
+    "t1_max_deviation": -0.0007257688188490799,
+    "t1_deviation_range": -0.0006970874107042791,
+    "t1_excursion_intensity": -0.0006653284218184492,
+    "deviation_jump_at_transition": NaN,
+    "similarity": -0.909912194506378,
+    "full_excursion_duration": 0.2229143769234809,
+    "learning_rate": 0.15110535206336922,
+    "t2_excursion_duration": -0.144932052837759,
+    "t2_vs_t1_path_integral_ratio": 0.10108487186046274,
+    "full_mean_deviation": 0.10045419667224692,
+    "full_area_under_curve": 0.10021665303006183,
+    "full_path_integral_deviation": 0.10021665303006178,
+    "full_mean_velocity": 0.08324621475651531,
+    "t2_vs_t1_max_deviation_ratio": 0.08084738576312733,
+    "t2_deviation_std": 0.08023431955031442,
+    "full_mean_acceleration": 0.08002852654487037,
+    "t2_excursion_intensity": 0.0799805892693419,
+    "t2_deviation_range": 0.07998057495995976,
+    "t2_mean_acceleration": 0.07982630767684654,
+    "full_path_length": 0.07955626101947486,
+    "full_deviation_std": 0.07952373395421637,
+    "full_max_velocity": 0.07896884373239328,
+    "t2_trajectory_curvature": 0.0789454830085313,
+    "full_trajectory_curvature": 0.0786710385699031,
+    "full_excursion_intensity": 0.07816901460118571,
+    "full_deviation_range": 0.07816820832967207,
+    "full_max_deviation": 0.0781676013766574,
+    "full_max_acceleration": 0.07799010107607168,
+    "t2_max_curvature": 0.07268477423300178,
+    "full_max_curvature": 0.07117559634825625,
+    "t2_max_momentum": 0.05083542051233252,
+    "full_max_momentum": 0.05077754172884929,
+    "full_mean_momentum": 0.048155913310221996,
+    "t2_mean_momentum": 0.048155722009696034,
+    "full_return_to_baseline": 0.04774938633056021,
+    "full_final_deviation": 0.04766781431138924,
+    "t2_return_to_baseline": 0.04761740038809989,
+    "full_min_deviation": -0.040473293606625625,
+    "full_initial_deviation": -0.03901308958961993,
+    "full_final_velocity": -0.02488363786475386,
+    "flr_after_t2": 0.020538480694130418
+  },
+  "top_trajectory_predictors": {
+    "loss_t1_after_t2": 0.9894570509588011,
+    "loss_t1_after_t1": -0.1429132108325797,
+    "t2_mean_deviation": 0.10057769260394588,
+    "t2_path_integral_deviation": 0.10033788588470352,
+    "t2_area_under_curve": 0.10033788588470349,
+    "t2_mean_velocity": 0.08329634978284495,
+    "t2_max_velocity": 0.08083631326050314,
+    "t2_max_deviation": 0.07998156857969546,
+    "t2_max_acceleration": 0.07969737122173585,
+    "t2_path_length": 0.07960825457026206
+  },
+  "trajectory_models": {
+    "linear_loss_t1_after_t1": {
+      "equation": "F = -0.9868 * loss_t1_after_t1 + 0.4706",
+      "coefficients": {
+        "a": -0.9867866314668635,
+        "b": 0.4706060535263457
+      },
+      "r_squared": 0.020424185830477115,
+      "correlation": -0.1429132108325797
+    },
+    "linear_loss_t1_after_t2": {
+      "equation": "F = 0.9997 * loss_t1_after_t2 + -0.1367",
+      "coefficients": {
+        "a": 0.9997170729014302,
+        "b": -0.13671507268757543
+      },
+      "r_squared": 0.9790252556920866,
+      "correlation": 0.989457050958801
+    },
+    "linear_loss_t2_after_t2": {
+      "equation": "F = 0.4064 * loss_t2_after_t2 + 0.2837",
+      "coefficients": {
+        "a": 0.4063984492147665,
+        "b": 0.28374438701964494
+      },
+      "r_squared": 0.0034935808566621818,
+      "correlation": 0.05910652127017995
+    },
+    "linear_t1_initial_deviation": {
+      "equation": "F = -0.1197 * t1_initial_deviation + 0.3571",
+      "coefficients": {
+        "a": -0.11968866235516235,
+        "b": 0.3570966298184112
+      },
+      "r_squared": 0.0015220211593273136,
+      "correlation": -0.03901308958961993
+    },
+    "linear_t1_final_deviation": {
+      "equation": "F = 0.0284 * t1_final_deviation + 0.3268",
+      "coefficients": {
+        "a": 0.028369898558499376,
+        "b": 0.3267709154896092
+      },
+      "r_squared": 0.00030556641155210507,
+      "correlation": 0.017480457990347583
+    },
+    "linear_t1_max_deviation": {
+      "equation": "F = -0.0000 * t1_max_deviation + 0.3356",
+      "coefficients": {
+        "a": -3.4631847174309713e-06,
+        "b": 0.3356277429683896
+      },
+      "r_squared": 5.267403740960575e-07,
+      "correlation": -0.0007257688188490799
+    },
+    "linear_t1_min_deviation": {
+      "equation": "F = -0.2721 * t1_min_deviation + 0.3621",
+      "coefficients": {
+        "a": -0.27211489406039047,
+        "b": 0.36208127230084536
+      },
+      "r_squared": 0.0016380874953678681,
+      "correlation": -0.040473293606625625
+    },
+    "linear_t1_mean_deviation": {
+      "equation": "F = -0.0002 * t1_mean_deviation + 0.3358",
+      "coefficients": {
+        "a": -0.00024462214011793104,
+        "b": 0.3358082986981199
+      },
+      "r_squared": 2.710480620393696e-06,
+      "correlation": -0.0016463537349563125
+    },
+    "linear_t1_path_length": {
+      "equation": "F = -0.0000 * t1_path_length + 0.3356",
+      "coefficients": {
+        "a": -1.8269634905623928e-06,
+        "b": 0.3356311447252423
+      },
+      "r_squared": 5.867484763610875e-07,
+      "correlation": -0.0007659950956047652
+    },
+    "linear_t1_path_integral_deviation": {
+      "equation": "F = -0.0000 * t1_path_integral_deviation + 0.3358",
+      "coefficients": {
+        "a": -7.631666300102176e-07,
+        "b": 0.335806024208387
+      },
+      "r_squared": 2.698682211477177e-06,
+      "correlation": -0.0016427666358739105
+    },
+    "multi_predictor": {
+      "equation": "F = 1.0000 * loss_t1_after_t2 + -1.0000 * loss_t1_after_t1 + 0.0000 * loss_t2_after_t2 + 0.0000",
+      "predictors": [
+        "loss_t1_after_t2",
+        "loss_t1_after_t1",
+        "loss_t2_after_t2"
+      ],
+      "coefficients": {
+        "loss_t1_after_t2": 1.0,
+        "loss_t1_after_t1": -1.0000000000000009,
+        "loss_t2_after_t2": 4.777191054582604e-16
+      },
+      "intercept": 3.925136474340401e-16,
+      "r_squared": 1.0
+    },
+    "summary": {
+      "best_single_predictor": [
+        "loss_t1_after_t2",
+        0.9790252556920866
+      ],
+      "top_5_predictors": [
+        [
+          "loss_t1_after_t2",
+          0.9790252556920866
+        ],
+        [
+          "loss_t1_after_t1",
+          0.020424185830477115
+        ],
+        [
+          "loss_t2_after_t2",
+          0.0034935808566621818
+        ],
+        [
+          "t1_min_deviation",
+          0.0016380874953678681
+        ],
+        [
+          "t1_initial_deviation",
+          0.0015220211593273136
+        ]
+      ],
+      "n_samples": 650
+    }
+  },
+  "predictor_comparison": {
+    "flr_correlation": 0.020538480694130418,
+    "similarity_correlation": -0.909912194506378,
+    "best_trajectory_predictor": "loss_t1_after_t2",
+    "best_trajectory_correlation": 0.9894570509588011,
+    "trajectory_beats_flr": true
+  },
+  "trajectory_by_regime": {
+    "t2_max_deviation": {
+      "mean": {
+        "lazy": 223.9412,
+        "rich": 83.7839
+      },
+      "std": {
+        "lazy": 3047.5438,
+        "rich": 295.9496
+      }
+    },
+    "t2_path_integral_deviation": {
+      "mean": {
+        "lazy": 3412.8349,
+        "rich": 2254.5934
+      },
+      "std": {
+        "lazy": 31071.4836,
+        "rich": 5968.7827
+      }
+    },
+    "t2_excursion_intensity": {
+      "mean": {
+        "lazy": 223.6556,
+        "rich": 83.4676
+      },
+      "std": {
+        "lazy": 3047.5381,
+        "rich": 295.9493
+      }
+    }
+  }
+}

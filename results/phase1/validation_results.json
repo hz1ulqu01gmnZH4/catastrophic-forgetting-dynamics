@@ -1,0 +1,12 @@
+{
+  "models": {
+    "Linear Similarity": 0.05489772334793763,
+    "Learning Rate Power": 0.5255871920118999,
+    "Combined Linear": 0.5645167184497688,
+    "Weight Change": 0.36527324191425437,
+    "Full Model": 0.6331511043960734
+  },
+  "predictions": {
+    "similarity_decreases_forgetting": {
+      "correlation": -0.2335837348678619,
+      "confirmed": 

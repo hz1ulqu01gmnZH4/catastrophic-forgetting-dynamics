@@ -1,0 +1,36 @@
+{
+  "timestamp": "2026-01-09T23:43:14.482666",
+  "n_samples": 1080,
+  "method_comparison": {
+    "none": {
+      "mean_forgetting": 0.03964328196726786,
+      "std_forgetting": 0.10314342918829475,
+      "mean_reduction": 8.834661473833231e-05,
+      "mean_relative_time": 1.2209768352617523
+    },
+    "ogd": {
+      "mean_forgetting": 0.07547504166528081,
+      "std_forgetting": 0.06388826244109272,
+      "mean_reduction": 0.010561835262341125,
+      "mean_relative_time": 1.4556835103997636
+    },
+    "agem": {
+      "mean_forgetting": 0.03808222874584344,
+      "std_forgetting": 0.10125325984226057,
+      "mean_reduction": 0.010565779139896021,
+      "mean_relative_time": 1.441474427128751
+    },
+    "scaling": {
+      "mean_forgetting": 0.043445274417368805,
+      "std_forgetting": 0.09662301049491699,
+      "mean_reduction": 0.0018501676136910808,
+      "mean_relative_time": 1.4918179185977911
+    }
+  },
+  "key_findings": [
+    "AGEM significantly reduces forgetting by 3.9% (p=3.21e-24)",
+    "Best method: AGEM with 1.1% mean forgetting reduction"
+  ],
+  "best_method": "agem",
+  "best_reduction": 0.010565779139896021
+}

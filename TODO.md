@@ -2,17 +2,20 @@
 
 ## Current State
 
-**What we know (updated 2026-01-08):**
+**What we know (updated 2026-01-09):**
 - ✅ **Gradient interference is the causal mechanism** (r = -0.87)
 - ✅ Similarity predicts forgetting because it determines gradient alignment
 - ✅ Simple equation: `Forgetting ≈ 0.59 - 0.65 × similarity`
 - ✅ Mechanistic equation: `Forgetting ∝ -cos(∇L_T1, ∇L_T2)`
 - ✅ Learning rate ≥ 0.1 triggers lazy→rich regime transition
 - ✅ Trajectory through weight space does NOT predict forgetting
+- ✅ **Gradient projection provides LIMITED mitigation** (~1% reduction)
+- ✅ Most task gradients are CONSTRUCTIVE (cos > 0), not destructive
 
 **What we still don't know:**
 - ~~WHY similarity dominates (causal mechanism)~~ ✅ SOLVED: Gradient interference
-- HOW effective are gradient projection methods (OGD, A-GEM)?
+- ~~HOW effective are gradient projection methods?~~ ✅ TESTED: Limited (~1% reduction)
+- WHETHER regularization (EWC) provides better mitigation
 - WHETHER we can predict/estimate similarity before training
 
 ---
@@ -124,24 +127,40 @@ experiments = {
 - [ ] Compare random vs. similarity-sorted orderings
 - [ ] Derive ordering algorithm from similarity structure
 
-### 6.2 Gradient Projection Methods
+### 6.2 Gradient Projection Methods ✅ COMPLETE
 
 **Hypothesis:** Projecting gradients to avoid interference reduces forgetting.
 
+**RESULT: LIMITED EFFECTIVENESS** - Methods work but effect is small (~1% reduction)
+
 ```python
-# Gradient modification strategies
-methods = {
-    'OGD': 'Project ∇L_T2 orthogonal to stored T1 gradients',
-    'A-GEM': 'Project if ∇L_T2 · ∇L_T1 < 0',
-    'gradient_scaling': 'Scale ∇L_T2 by (1 - |cos(∇L_T1, ∇L_T2)|)',
+# Results from 1080 experiments (6 similarities × 3 LRs × 3 memory sizes × 4 methods × 5 seeds)
+results = {
+    'A-GEM': {'reduction': '1.1%', 'time': '1.44x', 'best': True},
+    'OGD': {'reduction': '1.1%', 'time': '1.46x', 'harmful_when_constructive': True},
+    'Scaling': {'reduction': '0.2%', 'time': '1.49x'},
 }
+
+# KEY INSIGHT: Most gradients are CONSTRUCTIVE (mean cos angle = 0.3-0.4)
+# Destructive count = 0 in most runs → A-GEM rarely intervenes
+# OGD hurts when gradients are aligned (projects away useful learning)
 ```
 
-**Tasks:**
-- [ ] Implement OGD (Orthogonal Gradient Descent)
-- [ ] Implement A-GEM (Averaged Gradient Episodic Memory)
-- [ ] Measure forgetting reduction vs. computational cost
-- [ ] Find minimal memory budget for effective mitigation
+**Completed Tasks:**
+- [x] Implement OGD (Orthogonal Gradient Descent)
+- [x] Implement A-GEM (Averaged Gradient Episodic Memory)
+- [x] Implement gradient scaling method
+- [x] Measure forgetting reduction vs. computational cost
+- [x] Find minimal memory budget for effective mitigation
+
+**Key Findings:**
+1. **A-GEM is best** - Only intervenes when destructive, avoids harming constructive learning
+2. **OGD can hurt performance** - Projects even constructive gradients, loses useful learning
+3. **Limited effectiveness because gradients are mostly constructive** - In our setup, Task 2 gradients often help Task 1 (positive cosine angle)
+4. **Memory size has minimal impact** - 10 vs 100 gradient memory shows <0.1% difference
+5. **~45% computational overhead** - All methods add similar cost
+
+**Implication:** Gradient projection alone insufficient. Combined strategies (regularization + projection) or architecture-based methods may be needed for stronger mitigation.
 
 ### 6.3 Regularization Approaches
 
@@ -286,13 +305,14 @@ architectures = ['CNN', 'ResNet', 'Transformer', 'ViT']
 
 ---
 
-## Priority Order (Updated 2026-01-08)
+## Priority Order (Updated 2026-01-09)
 
-1. ~~**Phase 5.1** (Gradient Interference)~~ ✅ COMPLETE - Confirmed as causal mechanism
-2. **Phase 6.2** (Gradient Projection) - Direct intervention based on mechanism ← **NEXT**
-3. **Phase 7.1** (Similarity Estimation) - Needed for practical application
-4. **Phase 6.5** (Adaptive LR) - Simple, low-cost intervention
-5. **Phase 8.2** (Real Datasets) - Validation before publication
+1. ~~**Phase 5.1** (Gradient Interference)~~ ✅ COMPLETE - Confirmed as causal mechanism (r = -0.87)
+2. ~~**Phase 6.2** (Gradient Projection)~~ ✅ COMPLETE - Limited effectiveness (~1% reduction)
+3. **Phase 6.3** (Regularization/EWC) - May provide better mitigation than projection ← **NEXT**
+4. **Phase 7.1** (Similarity Estimation) - Needed for practical application
+5. **Phase 6.5** (Adaptive LR) - Simple, low-cost intervention
+6. **Phase 8.2** (Real Datasets) - Validation before publication
 
 ---
 
@@ -319,4 +339,5 @@ architectures = ['CNN', 'ResNet', 'Transformer', 'ViT']
 ---
 
 *Created: 2026-01-08*
-*Status: Planning*
+*Updated: 2026-01-09*
+*Status: Phase 6.2 Complete - Limited mitigation from gradient projection*

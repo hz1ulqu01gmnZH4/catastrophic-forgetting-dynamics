@@ -141,12 +141,18 @@ def compute_gradient_alignment(grad1: torch.Tensor, grad2: torch.Tensor) -> Tupl
 
     Returns:
         (cos_angle, projection, interference_magnitude)
+
+    Raises:
+        ValueError: If either gradient has near-zero norm (degenerate case)
     """
     norm1 = grad1.norm()
     norm2 = grad2.norm()
 
     if norm1 < 1e-10 or norm2 < 1e-10:
-        return 0.0, 0.0, 0.0
+        raise ValueError(
+            f"Degenerate gradient detected: ||grad1||={norm1.item():.2e}, ||grad2||={norm2.item():.2e}. "
+            f"Cannot compute gradient alignment with zero gradient."
+        )
 
     # Cosine similarity (gradient angle)
     cos_angle = (grad1 @ grad2) / (norm1 * norm2)

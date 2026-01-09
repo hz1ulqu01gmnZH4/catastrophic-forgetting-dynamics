@@ -143,16 +143,24 @@ def compute_effective_rank(W: torch.Tensor) -> float:
 
     Effective rank = nuclear norm / spectral norm
     This measures the "spread" of singular values.
+
+    Raises:
+        RuntimeError: If SVD computation fails
+        ValueError: If spectral norm is degenerate (< 1e-10)
     """
     try:
         U, S, Vh = torch.linalg.svd(W, full_matrices=False)
-        nuclear = S.sum()
-        spectral = S[0]
-        if spectral < 1e-10:
-            return 0.0
-        return (nuclear / spectral).item()
-    except Exception:
-        return float('nan')
+    except Exception as e:
+        raise RuntimeError(f"SVD failed in compute_effective_rank: {e}") from e
+
+    nuclear = S.sum()
+    spectral = S[0]
+    if spectral < 1e-10:
+        raise ValueError(
+            f"Degenerate spectral norm ({spectral.item():.2e}) in compute_effective_rank. "
+            f"Weight matrix may be zero or numerically unstable."
+        )
+    return (nuclear / spectral).item()
 
 
 def run_single_experiment(

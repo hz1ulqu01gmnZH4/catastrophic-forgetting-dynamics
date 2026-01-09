@@ -14,6 +14,7 @@ from dataclasses import dataclass, field
 from typing import List, Dict, Any, Optional
 from tqdm import tqdm
 import json
+import traceback
 from pathlib import Path
 
 from .nonlinear_models import (
@@ -299,6 +300,7 @@ def generate_phase2_dataset(
     """Generate full Phase 2 dataset."""
 
     results = []
+    failed_experiments = []
     total = config.total_runs()
 
     iterator = tqdm(total=total, desc="Phase 2 experiments") if show_progress else None
@@ -321,7 +323,18 @@ def generate_phase2_dataset(
                                 )
                                 results.append(result.to_dict())
                             except Exception as e:
-                                print(f"Error: {e}")
+                                failed_experiments.append({
+                                    'config': {
+                                        'hidden_width': hidden_width,
+                                        'activation': activation,
+                                        'similarity': similarity,
+                                        'learning_rate': lr,
+                                        'init_scale': init_scale,
+                                        'seed': seed
+                                    },
+                                    'error': str(e),
+                                    'traceback': traceback.format_exc()
+                                })
                                 continue
 
                             if iterator:
@@ -329,6 +342,17 @@ def generate_phase2_dataset(
 
     if iterator:
         iterator.close()
+
+    # Check failure rate
+    failure_rate = len(failed_experiments) / total if total > 0 else 0
+    if failure_rate > 0.05:
+        raise RuntimeError(
+            f"Experiment failure rate {failure_rate:.1%} exceeds 5% threshold. "
+            f"Failed {len(failed_experiments)}/{total} experiments. "
+            f"First failure: {failed_experiments[0] if failed_experiments else 'N/A'}"
+        )
+    elif failed_experiments:
+        print(f"Warning: {len(failed_experiments)}/{total} experiments failed ({failure_rate:.1%})")
 
     df = pd.DataFrame(results)
 

@@ -17,6 +17,7 @@ from dataclasses import dataclass, field
 from typing import List, Dict, Any, Optional, Tuple
 from tqdm import tqdm
 import json
+import traceback
 from pathlib import Path
 
 from .nonlinear_models import (
@@ -273,9 +274,11 @@ def run_phase4_experiment(
 
     try:
         subspace.fit(weights_t1)
-    except Exception:
-        # Fallback: use initial weights only
-        subspace.fit([W_init])
+    except Exception as e:
+        raise RuntimeError(
+            f"Subspace fitting failed on trajectory of {len(weights_t1)} weight snapshots. "
+            f"Cannot proceed with degraded single-point subspace: {e}"
+        ) from e
 
     # Recompute Task 1 deviations with fitted subspace
     deviation_t1 = []
@@ -373,6 +376,7 @@ def generate_phase4_dataset(
     """Generate full Phase 4 dataset."""
 
     results = []
+    failed_experiments = []
     total = config.total_runs()
 
     iterator = tqdm(total=total, desc="Phase 4 experiments") if show_progress else None
@@ -395,7 +399,18 @@ def generate_phase4_dataset(
                                 )
                                 results.append(result)
                             except Exception as e:
-                                print(f"Error: {e}")
+                                failed_experiments.append({
+                                    'config': {
+                                        'hidden_width': hidden_width,
+                                        'activation': activation,
+                                        'similarity': similarity,
+                                        'learning_rate': lr,
+                                        'init_scale': init_scale,
+                                        'seed': seed
+                                    },
+                                    'error': str(e),
+                                    'traceback': traceback.format_exc()
+                                })
                                 continue
 
                             if iterator:
@@ -403,6 +418,17 @@ def generate_phase4_dataset(
 
     if iterator:
         iterator.close()
+
+    # Check failure rate
+    failure_rate = len(failed_experiments) / total if total > 0 else 0
+    if failure_rate > 0.05:
+        raise RuntimeError(
+            f"Experiment failure rate {failure_rate:.1%} exceeds 5% threshold. "
+            f"Failed {len(failed_experiments)}/{total} experiments. "
+            f"First failure: {failed_experiments[0] if failed_experiments else 'N/A'}"
+        )
+    elif failed_experiments:
+        print(f"Warning: {len(failed_experiments)}/{total} experiments failed ({failure_rate:.1%})")
 
     df = pd.DataFrame(results)
 

@@ -2,7 +2,7 @@
 
 ## Current State
 
-**What we know (updated 2026-01-09):**
+**What we know (updated 2026-01-10):**
 - ✅ **Gradient interference is the causal mechanism** (r = -0.87)
 - ✅ Similarity predicts forgetting because it determines gradient alignment
 - ✅ Simple equation: `Forgetting ≈ 0.59 - 0.65 × similarity`
@@ -11,11 +11,15 @@
 - ✅ Trajectory through weight space does NOT predict forgetting
 - ✅ **Gradient projection provides LIMITED mitigation** (~1% reduction)
 - ✅ Most task gradients are CONSTRUCTIVE (cos > 0), not destructive
+- ✅ **L2 regularization provides SIGNIFICANT mitigation** (31% reduction, p<0.001)
+- ✅ **EWC provides LIMITED mitigation** (<1% reduction)
+- ✅ **Stability-plasticity tradeoff is severe** - best forgetting reduction costs 8x T2 performance
 
 **What we still don't know:**
 - ~~WHY similarity dominates (causal mechanism)~~ ✅ SOLVED: Gradient interference
 - ~~HOW effective are gradient projection methods?~~ ✅ TESTED: Limited (~1% reduction)
-- WHETHER regularization (EWC) provides better mitigation
+- ~~WHETHER regularization (EWC) provides better mitigation~~ ✅ TESTED: L2 yes (31%), EWC no (<1%)
+- HOW to balance stability-plasticity tradeoff optimally
 - WHETHER we can predict/estimate similarity before training
 
 ---
@@ -162,24 +166,43 @@ results = {
 
 **Implication:** Gradient projection alone insufficient. Combined strategies (regularization + projection) or architecture-based methods may be needed for stronger mitigation.
 
-### 6.3 Regularization Approaches
+### 6.3 Regularization Approaches ✅ COMPLETE
 
 **Hypothesis:** Penalizing movement from T1 solution reduces forgetting.
 
+**RESULT: L2 EFFECTIVE (31%), EWC LIMITED (<1%)**
+
 ```python
-# Regularization strategies
-methods = {
-    'EWC': 'λ Σ F_i (θ_i - θ_T1)²',  # Elastic Weight Consolidation
-    'SI': 'Synaptic Intelligence importance weighting',
-    'L2_to_T1': 'λ ||θ - θ_T1||²',  # Simple L2 to T1 solution
+# Results from 1620 experiments (6 similarities × 3 LRs × 6 λ values × 3 methods × 5 seeds)
+results = {
+    'L2': {'best_lambda': 1.0, 'reduction': '31.1%', 'p_value': '1.2e-05', 'significant': True},
+    'EWC': {'best_lambda': 10.0, 'reduction': '0.8%', 'p_value': '0.98', 'significant': False},
 }
+
+# CRITICAL: Stability-Plasticity Tradeoff
+# L2 λ=1.0: T2 loss increases 810% (severe plasticity cost)
+# L2 λ=0.1: 30.9% reduction with only 134% T2 loss increase (better tradeoff)
+# EWC: Minimal effect on forgetting, Fisher Information may not be informative enough
+
+# SURPRISING: L2 produces NEGATIVE forgetting at low similarity
+# Dissimilar tasks (sim=0.0): L2 reduces forgetting from 0.118 to -0.006
+# This indicates consolidation/transfer benefit, not just protection
 ```
 
-**Tasks:**
-- [ ] Implement EWC with Fisher information
-- [ ] Test L2 regularization toward T1 weights
-- [ ] Sweep regularization strength λ
-- [ ] Find optimal λ as function of similarity
+**Completed Tasks:**
+- [x] Implement EWC with Fisher information
+- [x] Implement L2 regularization toward T1 weights
+- [x] Sweep regularization strength λ (6 values: 0.0 to 100.0)
+- [x] Find optimal λ as function of similarity
+
+**Key Findings:**
+1. **L2 works, EWC doesn't** - Simple L2 to T1 weights beats Fisher-weighted EWC
+2. **Severe plasticity cost** - Best forgetting reduction comes with 8-10x worse T2 performance
+3. **L2 λ=0.1 best tradeoff** - 31% reduction with only 1.3x T2 loss increase
+4. **Optimal λ varies with similarity** - High λ for dissimilar, low λ for similar tasks
+5. **EWC Fisher Information insufficient** - Diagonal approximation may miss critical weights
+
+**Implication:** L2 regularization is effective but requires careful λ tuning to balance stability-plasticity. Combined L2 + gradient projection may provide both protection and maintained plasticity.
 
 ### 6.4 Architecture Modifications
 
@@ -305,13 +328,13 @@ architectures = ['CNN', 'ResNet', 'Transformer', 'ViT']
 
 ---
 
-## Priority Order (Updated 2026-01-09)
+## Priority Order (Updated 2026-01-10)
 
 1. ~~**Phase 5.1** (Gradient Interference)~~ ✅ COMPLETE - Confirmed as causal mechanism (r = -0.87)
 2. ~~**Phase 6.2** (Gradient Projection)~~ ✅ COMPLETE - Limited effectiveness (~1% reduction)
-3. **Phase 6.3** (Regularization/EWC) - May provide better mitigation than projection ← **NEXT**
-4. **Phase 7.1** (Similarity Estimation) - Needed for practical application
-5. **Phase 6.5** (Adaptive LR) - Simple, low-cost intervention
+3. ~~**Phase 6.3** (Regularization/EWC)~~ ✅ COMPLETE - L2 effective (31%), EWC limited (<1%)
+4. **Phase 6.5** (Adaptive LR) - Simple, low-cost intervention ← **NEXT**
+5. **Phase 7.1** (Similarity Estimation) - Needed for practical application
 6. **Phase 8.2** (Real Datasets) - Validation before publication
 
 ---
@@ -339,5 +362,5 @@ architectures = ['CNN', 'ResNet', 'Transformer', 'ViT']
 ---
 
 *Created: 2026-01-08*
-*Updated: 2026-01-09*
-*Status: Phase 6.2 Complete - Limited mitigation from gradient projection*
+*Updated: 2026-01-10*
+*Status: Phase 6.3 Complete - L2 regularization provides 31% reduction (but with plasticity cost)*

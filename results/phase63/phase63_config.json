@@ -1,0 +1,34 @@
+{
+  "d_in": 100,
+  "d_out": 10,
+  "n_samples": 1000,
+  "n_steps": 500,
+  "similarities": [
+    0.0,
+    0.2,
+    0.4,
+    0.6,
+    0.8,
+    1.0
+  ],
+  "learning_rates": [
+    0.01,
+    0.05,
+    0.1
+  ],
+  "lambda_values": [
+    0.0,
+    0.01,
+    0.1,
+    1.0,
+    10.0,
+    100.0
+  ],
+  "methods": [
+    "none",
+    "l2",
+    "ewc"
+  ],
+  "n_seeds": 5,
+  "fisher_samples": 200
+}

@@ -1,0 +1,162 @@
+{
+  "n_experiments": 1170,
+  "timestamp": "2026-01-10T16:17:23.580206",
+  "method_comparison": {
+    "forgetting_mean": {
+      "ewc": 0.0398,
+      "l2": Infinity,
+      "none": 0.0383
+    },
+    "forgetting_std": {
+      "ewc": 0.0984,
+      "l2": NaN,
+      "none": 0.1011
+    },
+    "forgetting_reduction_mean": {
+      "ewc": -0.0131,
+      "l2": -Infinity,
+      "none": 0.0
+    },
+    "forgetting_reduction_std": {
+      "ewc": 0.0893,
+      "l2": NaN,
+      "none": 0.0
+    },
+    "relative_time_mean": {
+      "ewc": 0.3198,
+      "l2": 0.2936,
+      "none": 0.276
+    },
+    "relative_time_std": {
+      "ewc": 0.0563,
+      "l2": 0.0817,
+      "none": 0.0557
+    },
+    "loss_t2_after_t2_mean": {
+      "ewc": 0.0175,
+      "l2": Infinity,
+      "none": 0.011
+    },
+    "loss_t2_after_t2_std": {
+      "ewc": 0.0334,
+      "l2": NaN,
+      "none": 0.016
+    }
+  },
+  "statistical_tests": {
+    "l2": {
+      "best_lambda": 1.0,
+      "best_reduction": 0.3107,
+      "t_statistic": 4.502898401697025,
+      "p_value": 1.2091890111961025e-05,
+      "significant": true
+    },
+    "ewc": {
+      "best_lambda": 10.0,
+      "best_reduction": 0.0082,
+      "t_statistic": -0.018570873351596285,
+      "p_value": 0.9852042383647966,
+      "significant": false
+    }
+  },
+  "optimal_lambdas": {
+    "l2": {
+      "0.0": 1.0,
+      "0.2": 1.0,
+      "0.4": 1.0,
+      "0.6": 1.0,
+      "0.8": 0.1,
+      "1.0": 0.0
+    },
+    "ewc": {
+      "0.0": 100.0,
+      "0.2": 10.0,
+      "0.4": 10.0,
+      "0.6": 0.0,
+      "0.8": 0.0,
+      "1.0": 0.0
+    }
+  },
+  "best_configurations": [
+    {
+      "method": "l2",
+      "lambda_value": 1.0,
+      "forgetting": -0.010562706882687836,
+      "forgetting_reduction": 0.31070524044114234,
+      "relative_time": 0.32797886265648735,
+      "loss_t2_after_t2": 0.10015128546332082
+    },
+    {
+      "method": "l2",
+      "lambda_value": 0.1,
+      "forgetting": 0.002548888174215828,
+      "forgetting_reduction": 0.3087916886828866,
+      "relative_time": 0.3136593606736925,
+      "loss_t2_after_t2": 0.025722658784765904
+    },
+    {
+      "method": "l2",
+      "lambda_value": 10.0,
+      "forgetting": -0.001676850525608289,
+      "forgetting_reduction": 0.14072373749358535,
+      "relative_time": 0.32947235107421874,
+      "loss_t2_after_t2": 0.14143634170433314
+    },
+    {
+      "method": "l2",
+      "lambda_value": 0.01,
+      "forgetting": 0.03196926730177094,
+      "forgetting_reduction": 0.05653808462264832,
+      "relative_time": 0.3189436117808024,
+      "loss_t2_after_t2": 0.011928563948507732
+    },
+    {
+      "method": "ewc",
+      "lambda_value": 10.0,
+      "forgetting": 0.03857829674312506,
+      "forgetting_reduction": 0.008198628315559635,
+      "relative_time": 0.3212999449835883,
+      "loss_t2_after_t2": 0.015519712440919283
+    },
+    {
+      "method": "ewc",
+      "lambda_value": 1.0,
+      "forgetting": 0.03829440804159217,
+      "forgetting_reduction": 0.0015009794540532093,
+      "relative_time": 0.3274924781587389,
+      "loss_t2_after_t2": 0.011450078318423321
+    },
+    {
+      "method": "ewc",
+      "lambda_value": 0.1,
+      "forgetting": 0.03829879732911373,
+      "forgetting_reduction": 0.00015824093177794723,
+      "relative_time": 0.3260985559887356,
+      "loss_t2_after_t2": 0.011048349696610393
+    },
+    {
+      "method": "ewc",
+      "lambda_value": 0.01,
+      "forgetting": 0.038299637452990316,
+      "forgetting_reduction": 1.5910981954051486e-05,
+      "relative_time": 0.3289285898208618,
+      "loss_t2_after_t2": 0.01100828967533797
+    },
+    {
+      "method": "ewc",
+      "lambda_value": 0.0,
+      "forgetting": 0.03829973519915425,
+      "forgetting_reduction": 0.0,
+      "relative_time": 0.2778837972217136,
+      "loss_t2_after_t2": 0.011003839914289389
+    },
+    {
+      "method": "l2",
+      "lambda_value": 0.0,
+      "forgetting": 0.03829973519915425,
+      "forgetting_reduction": 0.0,
+      "relative_time": 0.2716050492392646,
+      "loss_t2_after_t2": 0.011003839914289389
+    }
+  ]
+}

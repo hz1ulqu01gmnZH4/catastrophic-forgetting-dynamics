@@ -1,0 +1,30 @@
+{
+  "d_in": 100,
+  "d_out": 10,
+  "n_samples": 1000,
+  "n_steps": 500,
+  "similarities": [
+    0.0,
+    0.2,
+    0.4,
+    0.6,
+    0.8,
+    1.0
+  ],
+  "base_learning_rates": [
+    0.01,
+    0.05,
+    0.1
+  ],
+  "alpha_values": [
+    0.0,
+    0.25,
+    0.5,
+    0.75,
+    1.0,
+    1.5,
+    2.0
+  ],
+  "n_seeds": 5,
+  "min_lr_ratio": 0.01
+}
